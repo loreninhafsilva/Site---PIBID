@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Supervisores — PIBID Interdisciplinar UNESP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--azul-escuro);
+      padding: 7rem 4rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 30% 50%, rgba(22,163,74,0.25) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 80% 40%, rgba(37,99,184,0.45) 0%, transparent 60%);
+    }
+ 
+    .page-hero-inner { position: relative; max-width: 640px; margin: 0 auto; }
+    .page-hero .section-label { color: #6ee7b7; text-align: center; }
+ 
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: #fff;
+      opacity: 1;
+      animation: none;
+    }
+ 
+    .page-hero p {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #c2daff;
+      line-height: 1.7;
+    }
+ 
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 1.4rem 2rem;
+      background: var(--branco);
+      border: 1.5px solid var(--borda);
+      border-radius: 16px;
+      box-shadow: var(--sombra);
+    }
+ 
+    .stats-item { display: flex; flex-direction: column; gap: 0.15rem; }
+ 
+    .stats-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--verde);
+      line-height: 1;
+    }
+ 
+    .stats-lbl { font-size: 0.75rem; color: var(--texto-claro); font-weight: 500; }
+    .stats-divider { width: 1px; background: var(--borda); align-self: stretch; }
+ 
+    /* ── TOOLBAR / FILTROS ── */
+    .toolbar {
+      max-width: 1200px;
+      margin: 0 auto 2.5rem;
+    }
+ 
+    /* ── SECTION ── */
+    #supervisoresSection { background: var(--bg-alt); }
+ 
+    /* ── GRID ── */
+    .supervisores-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+ 
+    /* ── CARD ── */
+    .supervisor-card {
+      background: var(--branco);
+      border: 1.5px solid var(--borda);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+ 
+    .supervisor-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sombra-hover);
+      border-color: var(--verde-medio);
+    }
+ 
+    /* Foto */
+    .supervisor-photo-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--bg-alt2), var(--verde-suave));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+ 
+    .supervisor-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+ 
+    .supervisor-card:hover .supervisor-photo-wrap img { transform: scale(1.05); }
+ 
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--texto-claro);
+      font-size: 0.8rem;
+    }
+ 
+    .photo-placeholder span { font-size: 3.5rem; line-height: 1; }
+ 
+    /* Badge de área */
+    .area-badge {
+      position: absolute;
+      top: 10px; left: 10px;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+ 
+    .area-ef    { background: var(--azul-suave);  color: var(--azul-medio); border: 1px solid #bfdbfe; }
+    .area-bio   { background: var(--verde-suave);  color: var(--verde);      border: 1px solid #bbf7d0; }
+    .area-fis   { background: var(--roxo-suave);   color: var(--roxo);       border: 1px solid #ddd6fe; }
+ 
+    /* Faixa de anos de experiência */
+    .exp-ribbon {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: var(--azul-escuro);
+      color: #fff;
+      border-radius: 10px;
+      padding: 0.28rem 0.65rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+      text-align: center;
+    }
+ 
+    .exp-ribbon span {
+      display: block;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #7ab3f5;
+      line-height: 1;
+    }
+ 
+    /* Corpo do card */
+    .supervisor-info {
+      padding: 1.4rem 1.5rem 1.6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+ 
+    .supervisor-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--azul-escuro);
+      margin-bottom: 0.6rem;
+      line-height: 1.25;
+    }
+ 
+    .supervisor-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+ 
+    .meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--texto-claro);
+      line-height: 1.4;
+    }
+ 
+    .meta-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 0.05rem; }
+ 
+    /* Barra de experiência */
+    .exp-bar-wrap { margin-top: 1.1rem; }
+ 
+    .exp-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--texto-claro);
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+    }
+ 
+    .exp-bar-label strong { color: var(--verde); font-weight: 700; }
+ 
+    .exp-bar-track {
+      height: 5px;
+      background: var(--bg-alt2);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+ 
+    .exp-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--verde), #4ade80);
+    }
+ 
+    /* ── FILTROS: override cor ativa para verde ── */
+    .filter-btn.active {
+      background: var(--verde) !important;
+      border-color: var(--verde) !important;
+    }
+ 
+    .filter-btn:hover { border-color: var(--verde) !important; }
+ 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) { .supervisores-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .supervisores-grid { grid-template-columns: 1fr; }
+      .page-hero { padding: 6rem 1.5rem 3rem; }
+      #supervisoresSection { padding: 3rem 1.5rem; }
+      .stats-bar { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+ 
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <div class="nav-logo"><a href="index.html"><img src="Logo_PIBID_sigla-e1734774296538.png" width="25%" alt="PIBID Interdisciplinar"></a></div>
+  <ul class="nav-links">
+    <li><a href="index.html#sobre">Sobre</a></li>
+    <li><a href="index.html#objetivos">Objetivos</a></li>
+    <li><a href="index.html#areas">Áreas</a></li>
+    <li><a href="index.html#metodologia">Metodologia</a></li>
+    <li><a href="index.html#equipe">Equipe</a></li>
+    <li><a href="index.html#atividades">Atividades</a></li>
+  </ul>
+  <a href="index.html#contato" class="nav-cta">Contato</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+ 
+<!-- ── HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-inner reveal">
+    <p class="section-label">Professores Supervisores</p>
+    <h1>Mestres que guiam a formação</h1>
+    <p>Professores da educação básica das escolas públicas parceiras que acolhem os bolsistas, supervisionam suas práticas e constroem junto com eles uma escola mais saudável.</p>
+  </div>
+</div>
+ 
+<!-- ── SUPERVISORES ── -->
+<section id="supervisoresSection">
+ 
+  <!-- Stats -->
+  <div class="stats-bar reveal">
+    <div class="stats-item">
+      <span class="stats-num">3</span>
+      <span class="stats-lbl">Supervisores no total</span>
+    </div>
+    <div class="stats-divider"></div>
+    <div class="stats-item">
+      <span class="stats-num">2</span>
+      <span class="stats-lbl">Escolas parceiras</span>
+    </div>
+    <div class="stats-divider"></div>
+    <div class="stats-item">
+      <span class="stats-num">3</span>
+      <span class="stats-lbl">Ed. Física</span>
+    </div>
+    <div class="stats-divider"></div>
+    <div class="stats-item">
+      <span class="stats-num">0</span>
+      <span class="stats-lbl">Ciências Biológicas</span>
+    </div>
+    <div class="stats-divider"></div>
+    <div class="stats-item">
+      <span class="stats-num">0</span>
+      <span class="stats-lbl">Física</span>
+    </div>
+  </div>
+ 
+  <!-- Filtros -->
+  <div class="toolbar reveal">
+    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="ef">Ed. Física</button>
+      <button class="filter-btn" data-filter="bio">Ciências Biológicas</button>
+      <button class="filter-btn" data-filter="fis">Física</button>
+    </div>
+  </div>
+ 
+  <!-- Grid -->
+  <div class="supervisores-grid" id="supervisoresGrid">
+ 
+    <!-- SUPERVISOR Douglas -->
+    <div class="supervisor-card reveal" data-area="ef">
+      <div class="supervisor-photo-wrap">
+        <div class="photo-placeholder"><span>👤</span></div>
+        <span class="area-badge area-ef">Ed. Física</span>
+      </div>
+      <div class="supervisor-info">
+        <div class="supervisor-name">Prof. Douglas Mateus Balbino</div>
+        <div class="supervisor-meta">
+          <div class="meta-row">
+            <span class="meta-icon">📚</span>
+            Educação Física
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">🏫</span>
+            E.M. Antônio Maria Marrote — Rio Claro/SP
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">🟢</span>
+            Supervisor ativo · desde Mar/2024
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- SUPERVISORA Letícia -->
+    <div class="supervisor-card reveal" data-area="ef">
+      <div class="supervisor-photo-wrap">
+        <div class="photo-placeholder"><span>👤</span></div>
+        <span class="area-badge area-ef">Ed. Física</span>
+      </div>
+      <div class="supervisor-info">
+        <div class="supervisor-name">Profa. Leticia</div>
+        <div class="supervisor-meta">
+          <div class="meta-row">
+            <span class="meta-icon">📚</span>
+            Educação Físicia
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">🏫</span>
+            E.M. Profº Sylvio de Araujo — Rio Claro/SP
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">🟢</span>
+            Supervisora ativa · desde Jan/2024
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- SUPERVISOR Roraima -->
+    <div class="supervisor-card reveal" data-area="ef">
+      <div class="supervisor-photo-wrap">
+        <div class="photo-placeholder"><span>👤</span></div>
+        <span class="area-badge area-ef">Ed. Física</span>
+      </div>
+      <div class="supervisor-info">
+        <div class="supervisor-name">Prof. Roraima Costa Filho</div>
+        <div class="supervisor-meta">
+          <div class="meta-row">
+            <span class="meta-icon">📚</span>
+           Educação Física
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">🏫</span>
+            E. M. Antonio Maria Marrote - Rio Claro/SP
+          </div>
+          <div class="meta-row">
+            <span class="meta-icon">🟢</span>
+            Supervisor ativo · desde Mar/2025
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- ── FOOTER ── -->
+<footer>
+  <!-- Logos institucionais -->
+  <div class="footer-logos">
+    <div class="footer-logo-item">
+      <img src="logo-governo-federal.png" alt="Governo Federal" class="footer-logo" />
+      <!-- Substitua pelo caminho correto da imagem -->
+    </div>
+    <div class="footer-logo-item">
+      <img src="logo-ib.jpeg" alt="Instituto de Biociências – IB/UNESP" class="footer-logo" />
+    </div>
+    <div class="footer-logo-item">
+      <img src="logo-igce.png" alt="Instituto de Geociências e Ciências Exatas – IGCE/UNESP" class="footer-logo" />
+    </div>
+  </div>
+
+  <div class="footer-brand">PIBID <span>Interdisciplinar</span> · UNESP</div>
+  <ul class="footer-links">
+    <li><a href="index.html#sobre">Sobre</a></li>
+    <li><a href="index.html#objetivos">Objetivos</a></li>
+    <li><a href="index.html#areas">Áreas</a></li>
+    <li><a href="index.html#metodologia">Metodologia</a></li>
+    <li><a href="index.html#equipe">Equipe</a></li>
+    <li><a href="index.html#atividades">Atividades</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 PIBID UNESP · Financiado pela CAPES/MEC</div>
+</footer>
+ 
+<script>
+  // ── Filtros
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('#supervisoresGrid .supervisor-card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.area === filter) ? '' : 'none';
+      });
+    });
+  });
+ 
+  // ── Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+ 
+  // ── Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 40 ? '0 2px 16px rgba(0,0,0,0.1)' : '0 1px 8px rgba(0,0,0,0.06)';
+  });
+</script>
+</body>
+</html>
+ 
