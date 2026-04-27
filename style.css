@@ -1,6 +1,3 @@
-
-Copiar
-
 /* ─── VARIÁVEIS ─── */
 a {
   text-decoration: none;
@@ -39,13 +36,14 @@ a {
  
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
  
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
  
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
   color: var(--texto);
   overflow-x: hidden;
+  max-width: 100%;
 }
  
     /* ── PAGE HERO ── */
@@ -402,6 +400,7 @@ nav {
 .hero-content {
   position: relative;
   max-width: 680px;
+  width: 100%;
 }
  
 .hero-badge {
@@ -437,13 +436,13 @@ nav {
  
 h1 {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  font-weight: 800;
+  font-size: clamp(2rem, 8vw, 5rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: #fff;
   opacity: 0;
   animation: fadeUp 0.8s 0.4s forwards;
+  word-break: break-word;
 }
  
 h1 em {
@@ -453,7 +452,7 @@ h1 em {
  
 .hero-sub {
   margin-top: 1.5rem;
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 300;
   color: #c2daff;
   line-height: 1.7;
@@ -1077,9 +1076,9 @@ footer {
   gap: 1.5rem;
 }
  
-.footer-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--azul-escuro); }
+.footer-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--azul-escuro); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 .footer-brand span { color: var(--azul-claro); }
-.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links { display: flex; gap: 1.2rem; list-style: none; flex-wrap: wrap; }
 .footer-links a { font-size: 0.82rem; color: var(--laranja); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--azul-escuro); }
 .footer-copy { font-size: 0.78rem; color: #7ab3f5; }
@@ -1100,7 +1099,8 @@ footer {
 }
  
 .footer-logo {
-  height: 100px;       /* Ajuste conforme necessário */
+  height: 80px;
+  max-width: 120px;
   width: auto;
   object-fit: contain;
   transition: opacity 0.2s ease;
@@ -1585,13 +1585,17 @@ footer {
 }
  
 @media (max-width: 768px) {
-  nav { padding: 1rem 1.5rem; }
-  .nav-links, .nav-cta { display: none; }
+  nav { padding: 0.85rem 1.25rem; }
+  .nav-cta { display: none; }
   .hamburger { display: flex; }
   section { padding: 4rem 1.5rem; }
   #hero { padding: 6rem 1.5rem 3rem; }
   .obj-grid, .areas-grid, .roles-grid, .escola-features { grid-template-columns: 1fr; }
   .met-flow { flex-direction: column; }
   .met-step { border-right: none; border-bottom: 1.5px solid var(--borda); }
-  footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+  footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.25rem; overflow: hidden; }
+  .footer-logos { gap: 1rem; }
+  .footer-logo { height: 60px; max-width: 90px; }
+  .footer-links { gap: 0.8rem; }
+  .footer-brand { font-size: 0.95rem; }
 }
