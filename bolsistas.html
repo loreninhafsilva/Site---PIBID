@@ -38,29 +38,6 @@
 <!-- ── BOLSISTAS ── -->
 <section id="bolsistasSection">
  
-  <!-- Stats -->
-  <div class="stats-bar reveal">
-    <div class="stats-item">
-      <span class="stats-num">6</span>
-      <span class="stats-lbl">Bolsistas no total</span>
-    </div>
-    <div class="stats-divider"></div>
-    <div class="stats-item">
-      <span class="stats-num">2</span>
-      <span class="stats-lbl">Ed. Física</span>
-    </div>
-    <div class="stats-divider"></div>
-    <div class="stats-item">
-      <span class="stats-num">2</span>
-      <span class="stats-lbl">Ciências Biológicas</span>
-    </div>
-    <div class="stats-divider"></div>
-    <div class="stats-item">
-      <span class="stats-num">2</span>
-      <span class="stats-lbl">Física</span>
-    </div>
-  </div>
- 
   <!-- Filters -->
   <div class="toolbar reveal">
     <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
@@ -93,7 +70,7 @@
     <!-- BOLSISTA Isabela Failta -->
     <div class="bolsista-card reveal" data-curso="bio">
       <div class="bolsista-photo-wrap">
-         <div class="photo-placeholder"><img src="" alt="Isabella Failta"></div>
+         <div class="photo-placeholder"><img src="foto-default.jpg" alt="Isabella Failta"></div>
         <span class="curso-badge curso-bio">Ciências Biológicas</span>
       </div>
       <div class="bolsista-info">
@@ -109,7 +86,7 @@
     <!-- BOLSISTA Giovanna Coutinho -->
     <div class="bolsista-card reveal" data-curso="bio">
       <div class="bolsista-photo-wrap">
-         <div class="photo-placeholder"><img src="" alt="Giovanna Coutinho"></div>
+         <div class="photo-placeholder"><img src="foto-default.jpg" alt="Giovanna Coutinho"></div>
         <span class="curso-badge curso-bio">Ciências Biológicas</span>
       </div>
       <div class="bolsista-info">
@@ -189,7 +166,7 @@
         <!-- BOLSISTA Virgilio Cardoso Malfetti Ribeiro Guedes -->
     <div class="bolsista-card reveal" data-curso="ef">
       <div class="bolsista-photo-wrap">
-        <div class="photo-placeholder"><img src="foto-virgilio.jpeg" alt="Virgilio Cardoso Malfetti Ribeiro Guedes"></div>
+        <div class="photo-placeholder"><img src="foto-default.jpg" alt="Virgilio Cardoso Malfetti Ribeiro Guedes"></div>
         <span class="curso-badge curso-ef">Ed. Física</span>
       </div>
       <div class="bolsista-info">
@@ -314,6 +291,22 @@
       </div>
     </div>
 
+        <!-- BOLSISTA Marcelo Alves Filho -->
+    <div class="bolsista-card reveal" data-curso="ef">
+      <div class="bolsista-photo-wrap">
+        <div class="photo-placeholder"><img src="foto-marcelo.jpeg" alt="Marcelo Alves Filho"></div>
+        <span class="curso-badge curso-ef">Ed. Física</span>
+      </div>
+      <div class="bolsista-info">
+        <div class="bolsista-name">Marcelo Alves Filho</div>
+        <div class="bolsista-meta">
+          <div class="meta-row"><span class="meta-icon">🎓</span>Educação Física</div>
+          <div class="meta-row"><span class="meta-icon">📅</span>4º ano</div>
+          <div class="meta-row"><span class="meta-icon">🟢</span>Ativo · desde Mar/2025</div>
+        </div>
+      </div>
+    </div>
+
  
   </div>
 </section>
@@ -345,8 +338,9 @@
   </ul>
   <div class="footer-copy">© 2025 PIBID UNESP · Financiado pela CAPES/MEC</div>
 </footer>
- 
+
 <script>
+
   // ── Filtros
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {

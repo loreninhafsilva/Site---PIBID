@@ -565,5 +565,31 @@
   <div class="footer-copy">© 2025 PIBID UNESP · Financiado pela CAPES/MEC</div>
 </footer>
 <script src="script.js"></script>
+
+<script>
+  // ── Hamburger / Mobile nav
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.querySelector('.nav-links');
+
+// Cria overlay dinamicamente
+const overlay = document.createElement('div');
+overlay.classList.add('nav-overlay');
+document.body.appendChild(overlay);
+
+function toggleMenu(open) {
+  hamburger.classList.toggle('open', open);
+  navLinks.classList.toggle('open', open);
+  overlay.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', () => toggleMenu(!navLinks.classList.contains('open')));
+overlay.addEventListener('click', () => toggleMenu(false));
+
+// Fecha ao clicar em qualquer link do menu
+navLinks.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => toggleMenu(false))
+);
+</script>
 </body>
 </html>
